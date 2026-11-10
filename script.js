@@ -1,19 +1,21 @@
-// التحكم في التنقل بين شاشات التطبيق
-function showScreen(screenId) {
-  document.querySelectorAll('.screen').forEach(screen => {
-    screen.classList.remove('active');
-  });
-  document.getElementById(screenId).classList.add('active');
+function openAuthModal(type) {
+  const modal = document.getElementById('auth-modal');
+  modal.classList.add('active');
+  toggleModalForm(type);
 }
 
-// التبديل بين تبويبات تسجيل الدخول وإنشاء حساب
-function switchTab(tabName) {
-  const loginForm = document.getElementById('login-form');
-  const registerForm = document.getElementById('register-form');
+function closeAuthModal() {
+  const modal = document.getElementById('auth-modal');
+  modal.classList.remove('active');
+}
+
+function toggleModalForm(type) {
+  const loginForm = document.getElementById('modal-login-form');
+  const registerForm = document.getElementById('modal-register-form');
   const tabLogin = document.getElementById('tab-login');
   const tabRegister = document.getElementById('tab-register');
 
-  if (tabName === 'login') {
+  if (type === 'login') {
     loginForm.classList.add('active');
     registerForm.classList.remove('active');
     tabLogin.classList.add('active');
@@ -24,23 +26,4 @@ function switchTab(tabName) {
     tabRegister.classList.add('active');
     tabLogin.classList.remove('active');
   }
-}
-
-// معالجة تسجيل الدخول والانتقال للوحة التحكم
-function handleLogin(e) {
-  e.preventDefault();
-  showScreen('dashboard-screen');
-}
-
-// معالجة إنشاء الحساب والانتقال للوحة التحكم
-function handleRegister(e) {
-  e.preventDefault();
-  showScreen('dashboard-screen');
-}
-
-// معالجة إرسال استمارة إضافة عقار جديد
-function handlePropertySubmit(e) {
-  e.preventDefault();
-  alert('تم استلام بيانات العقار بنجاح! (قريباً سيتم ربطه بقاعدة البيانات)');
-  showScreen('dashboard-screen');
 }
