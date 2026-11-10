@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DarKira الجزائر - الخريطة التفاعلية</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="app-body">
+
+  <!-- شريط التطبيق العلوي -->
+  <header class="app-header">
+    <div class="brand-small">
+      <span class="dk-prefix">Dar</span><span class="dk-main">Kira</span>
+    </div>
+    <div class="map-title-header">
+      <span>الخريطة التفاعلية والمرافق</span>
+    </div>
+    <div class="user-profile-icon">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Ahmed">
+    </div>
+  </header>
+
+  <!-- محتوى الخريطة -->
+  <main class="map-container-screen">
+    
+    <!-- واجهة خريطة وهمية بتصميم دمج الألوان الداكنة والخرائط -->
+    <div class="mock-map-view">
+      <div class="map-grid-overlay"></div>
+
+      <!-- دبابيس العقارات على الخريطة -->
+      <div class="map-pin pin-1" onclick="alert('شقة مفروشة - 80,000 DA')">
+        <span>80,000 DA</span>
+      </div>
+
+      <div class="map-pin pin-2" onclick="alert('فيلا فاخرة للبيع')">
+        <span>3.2 مليار</span>
+      </div>
+
+      <div class="map-pin pin-3" onclick="alert('محل تجاري - Aliger')">
+        <span>Aliger</span>
+      </div>
+
+      <!-- أدوات التحكم في الخريطة (+ / -) -->
+      <div class="map-controls">
+        <button class="map-ctrl-btn">+</button>
+        <button class="map-ctrl-btn">-</button>
+      </div>
+
+      <div class="map-watermark">
+        Map data ©2026 DarKira Maps
+      </div>
+    </div>
+
+  </main>
+
+  <!-- شريط التنقل السفلي -->
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Ads</span>
+    </a>
+    <a href="map.html" class="nav-item active">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      <span>Map</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
