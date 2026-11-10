@@ -1,4 +1,4 @@
-// التبديل بين شاشات التطبيق الكاملة
+// التحكم في التنقل بين شاشات التطبيق
 function showScreen(screenId) {
   document.querySelectorAll('.screen').forEach(screen => {
     screen.classList.remove('active');
@@ -26,13 +26,21 @@ function switchTab(tabName) {
   }
 }
 
-// عند تسجيل الدخول ينقلنا مباشرة للواجهة الرئيسية
+// معالجة تسجيل الدخول والانتقال للوحة التحكم
 function handleLogin(e) {
   e.preventDefault();
   showScreen('dashboard-screen');
 }
 
+// معالجة إنشاء الحساب والانتقال للوحة التحكم
 function handleRegister(e) {
   e.preventDefault();
+  showScreen('dashboard-screen');
+}
+
+// معالجة إرسال استمارة إضافة عقار جديد
+function handlePropertySubmit(e) {
+  e.preventDefault();
+  alert('تم استلام بيانات العقار بنجاح! (قريباً سيتم ربطه بقاعدة البيانات)');
   showScreen('dashboard-screen');
 }
