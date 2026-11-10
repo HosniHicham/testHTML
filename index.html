@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المنصة العقارية - الرئيسية</title>
+  <title>المنصة العقارية المتكاملة</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 </head>
 <body>
 
-  <!-- ==================== 1. شاشة تسجيل الدخول ==================== -->
+  <!-- ==================== 1. شاشة تسجيل الدخول وإنشاء حساب ==================== -->
   <div id="auth-screen" class="screen active">
     <div class="glow-bg"></div>
     <div class="auth-container">
@@ -88,10 +88,9 @@
   </div>
 
 
-  <!-- ==================== 2. شاشة استكشاف العقارات (المستكشف الرئيسي) ==================== -->
+  <!-- ==================== 2. شاشة استكشاف العقارات (الرئيسية) ==================== -->
   <div id="dashboard-screen" class="screen">
     
-    <!-- الشريط العلوي Navigation -->
     <header class="navbar">
       <div class="nav-brand">
         <div class="logo-icon sm">
@@ -109,15 +108,13 @@
       </nav>
 
       <div class="user-action">
-        <button class="add-prop-btn">+ إضافة عقار</button>
+        <button class="add-prop-btn" onclick="showScreen('add-property-screen')">+ إضافة عقار</button>
         <button class="logout-btn" onclick="showScreen('auth-screen')">خروج</button>
       </div>
     </header>
 
-    <!-- محتوى الصفحة الرئيسي -->
     <main class="main-container">
 
-      <!-- قسم البحث والفلترة -->
       <section class="filter-section">
         <div class="filter-box">
           <div class="filter-group">
@@ -148,13 +145,11 @@
         </div>
       </section>
 
-      <!-- شبكة عرض العقارات (Property Grid) -->
       <section class="properties-section">
         <h3 class="section-title">العقارات المتاحة حديثاً</h3>
 
         <div class="properties-grid">
 
-          <!-- بطاقة عقار 1 -->
           <div class="property-card">
             <div class="card-image">
               <span class="badge badge-teal">للكراء</span>
@@ -175,7 +170,6 @@
             </div>
           </div>
 
-          <!-- بطاقة عقار 2 -->
           <div class="property-card">
             <div class="card-image">
               <span class="badge badge-blue">للبيع</span>
@@ -196,7 +190,6 @@
             </div>
           </div>
 
-          <!-- بطاقة عقار 3 -->
           <div class="property-card">
             <div class="card-image">
               <span class="badge badge-teal">للكراء</span>
@@ -220,7 +213,91 @@
       </section>
 
     </main>
+  </div>
 
+
+  <!-- ==================== 3. شاشة إضافة عقار جديد ==================== -->
+  <div id="add-property-screen" class="screen">
+    
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="logo-icon sm">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          </svg>
+        </div>
+        <span>العقارية DZ - إضافة عقار</span>
+      </div>
+      <div class="user-action">
+        <button class="logout-btn" onclick="showScreen('dashboard-screen')">العودة للرئيسية</button>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="form-card-container">
+        <div class="form-header">
+          <h3>إضافة عقار جديد للقائمة</h3>
+          <p>قم بتعبئة التفاصيل بدقة لضمان ظهور عقارك للبحث الفعّال</p>
+        </div>
+
+        <form id="new-property-form" onsubmit="handlePropertySubmit(event)">
+          
+          <div class="form-grid">
+            <div class="input-group">
+              <label>عنوان العقار</label>
+              <input type="text" placeholder="مثال: شقة فاخرة مطلة على البحر" required>
+            </div>
+
+            <div class="input-group">
+              <label>نوع المعاملة</label>
+              <select required>
+                <option value="rent">للكراء</option>
+                <option value="sale">للبيع</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>نوع العقار</label>
+              <select required>
+                <option value="apartment">شقة</option>
+                <option value="villa">فيلا</option>
+                <option value="commercial">محل تجاري</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>الولاية / المدينة</label>
+              <input type="text" placeholder="مثال: وهران، الحبيب" required>
+            </div>
+
+            <div class="input-group">
+              <label>السعر (د.ج)</label>
+              <input type="number" placeholder="مثال: 45000" required>
+            </div>
+
+            <div class="input-group">
+              <label>المساحة (متر مربع)</label>
+              <input type="number" placeholder="مثال: 120" required>
+            </div>
+          </div>
+
+          <div class="input-group full-width">
+            <label>وصف تفصيلي للعقار</label>
+            <textarea rows="4" placeholder="اكتب تفاصيل إضافية عن المميزات، القرب من المرافق العامة..."></textarea>
+          </div>
+
+          <div class="input-group full-width">
+            <label>صور العقار</label>
+            <div class="file-upload-box">
+              <span>📁 اضغط لاختيار الصور أو اسحبها هنا</span>
+              <input type="file" multiple accept="image/*">
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn full-btn">نشر العقار الآن</button>
+        </form>
+      </div>
+    </main>
   </div>
 
   <script src="script.js"></script>
