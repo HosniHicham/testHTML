@@ -3,99 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المدخل - المنصة العقارية</title>
+  <title>المنصة العقارية - الرئيسية</title>
   <link rel="stylesheet" href="style.css">
-  <!-- خط تجريدي حديث ومناسب للواجهات البرمجية والعقارية -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="auth-container">
-    <!-- خلفية جمالية مدمجة للتصميم الداكن -->
+  <!-- ==================== 1. شاشة تسجيل الدخول ==================== -->
+  <div id="auth-screen" class="screen active">
     <div class="glow-bg"></div>
-
-    <div class="auth-card">
-      <div class="brand-header">
-        <div class="logo-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-        </div>
-        <h2>مرحباً بك</h2>
-        <p>قم بتسجيل الدخول وإدارة عقاراتك واستكشاف الفرص المتاحة</p>
-      </div>
-
-      <!-- تبويب التبديل بين الدخول وإنشاء حساب -->
-      <div class="tab-buttons">
-        <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">تسجيل الدخول</button>
-        <button id="tab-register" class="tab-btn" onclick="switchTab('register')">حساب جديد</button>
-      </div>
-
-      <!-- نموذج تسجيل الدخول -->
-      <form id="login-form" class="auth-form active">
-        <div class="input-group">
-          <label for="login-email">البريد الإلكتروني</label>
-          <input type="email" id="login-email" placeholder="name@example.com" required autocomplete="email">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="brand-header">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h2>مرحباً بك</h2>
+          <p>قم بتسجيل الدخول وإدارة عقاراتك واستكشاف الفرص المتاحة</p>
         </div>
 
-        <div class="input-group">
-          <label for="login-password">كلمة المرور</label>
-          <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        <div class="tab-buttons">
+          <button id="tab-login" class="tab-btn active" onclick="switchTab('login')">تسجيل الدخول</button>
+          <button id="tab-register" class="tab-btn" onclick="switchTab('register')">حساب جديد</button>
         </div>
 
-        <div class="form-options">
-          <label class="remember-me">
-            <input type="checkbox" id="remember">
-            <span>تذكرني</span>
-          </label>
-          <a href="#" class="forgot-pass">نسيت كلمة المرور؟</a>
-        </div>
+        <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
+          <div class="input-group">
+            <label for="login-email">البريد الإلكتروني</label>
+            <input type="email" id="login-email" placeholder="name@example.com" required autocomplete="email">
+          </div>
 
-        <button type="submit" class="submit-btn">
-          <span>دخول المنصة</span>
-        </button>
-      </form>
+          <div class="input-group">
+            <label for="login-password">كلمة المرور</label>
+            <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
 
-      <!-- نموذج إنشاء حساب جديد -->
-      <form id="register-form" class="auth-form">
-        <div class="input-group">
-          <label for="reg-fullname">الاسم الكامل</label>
-          <input type="text" id="reg-fullname" placeholder="أحمد محمد" required>
-        </div>
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" id="remember">
+              <span>تذكرني</span>
+            </label>
+            <a href="#" class="forgot-pass">نسيت كلمة المرور؟</a>
+          </div>
 
-        <div class="input-group">
-          <label for="reg-email">البريد الإلكتروني</label>
-          <input type="email" id="reg-email" placeholder="name@example.com" required autocomplete="email">
-        </div>
+          <button type="submit" class="submit-btn">دخول المنصة</button>
+        </form>
 
-        <div class="input-group">
-          <label for="reg-role">نوع الحساب</label>
-          <select id="reg-role">
-            <option value="user">باحث عن عقار / مستأجر</option>
-            <option value="landlord">صاحب عقار / مؤجر</option>
-            <option value="agent">وكيل عقاري</option>
-          </select>
-        </div>
+        <form id="register-form" class="auth-form" onsubmit="handleRegister(event)">
+          <div class="input-group">
+            <label for="reg-fullname">الاسم الكامل</label>
+            <input type="text" id="reg-fullname" placeholder="أحمد محمد" required>
+          </div>
 
-        <div class="input-group">
-          <label for="reg-password">كلمة المرور</label>
-          <input type="password" id="reg-password" placeholder="••••••••" required autocomplete="new-password">
-        </div>
+          <div class="input-group">
+            <label for="reg-email">البريد الإلكتروني</label>
+            <input type="email" id="reg-email" placeholder="name@example.com" required autocomplete="email">
+          </div>
 
-        <button type="submit" class="submit-btn">
-          <span>إنشاء حساب جديد</span>
-        </button>
-      </form>
+          <div class="input-group">
+            <label for="reg-role">نوع الحساب</label>
+            <select id="reg-role">
+              <option value="user">باحث عن عقار / مستأجر</option>
+              <option value="landlord">صاحب عقار / مؤجر</option>
+              <option value="agent">وكيل عقاري</option>
+            </select>
+          </div>
 
-      <div class="footer-note">
-        جميع الحقوق محفوظة &copy; 2026 المنصة العقارية
+          <div class="input-group">
+            <label for="reg-password">كلمة المرور</label>
+            <input type="password" id="reg-password" placeholder="••••••••" required autocomplete="new-password">
+          </div>
+
+          <button type="submit" class="submit-btn">إنشاء حساب جديد</button>
+        </form>
+
+        <div class="footer-note">جميع الحقوق محفوظة &copy; 2026 المنصة العقارية</div>
       </div>
     </div>
   </div>
 
-  <script src="main.js"></script>
+
+  <!-- ==================== 2. شاشة استكشاف العقارات (المستكشف الرئيسي) ==================== -->
+  <div id="dashboard-screen" class="screen">
+    
+    <!-- الشريط العلوي Navigation -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="logo-icon sm">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          </svg>
+        </div>
+        <span>العقارية DZ</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">العقارات</a>
+        <a href="#">المفضلة</a>
+      </nav>
+
+      <div class="user-action">
+        <button class="add-prop-btn">+ إضافة عقار</button>
+        <button class="logout-btn" onclick="showScreen('auth-screen')">خروج</button>
+      </div>
+    </header>
+
+    <!-- محتوى الصفحة الرئيسي -->
+    <main class="main-container">
+
+      <!-- قسم البحث والفلترة -->
+      <section class="filter-section">
+        <div class="filter-box">
+          <div class="filter-group">
+            <label>نوع العملية</label>
+            <select id="filter-type">
+              <option value="all">الكل</option>
+              <option value="rent">للكراء</option>
+              <option value="sale">للبيع</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>نوع العقار</label>
+            <select id="filter-category">
+              <option value="all">جميع الأنواع</option>
+              <option value="apartment">شقة (F3 / F4)</option>
+              <option value="villa">فيلا</option>
+              <option value="commercial">محل تجاري</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>الولاية</label>
+            <input type="text" placeholder="مثال: الجزائر، وهران..." id="filter-location">
+          </div>
+
+          <button class="search-btn">بحث متقدم</button>
+        </div>
+      </section>
+
+      <!-- شبكة عرض العقارات (Property Grid) -->
+      <section class="properties-section">
+        <h3 class="section-title">العقارات المتاحة حديثاً</h3>
+
+        <div class="properties-grid">
+
+          <!-- بطاقة عقار 1 -->
+          <div class="property-card">
+            <div class="card-image">
+              <span class="badge badge-teal">للكراء</span>
+              <div class="placeholder-img">صورة العقار</div>
+            </div>
+            <div class="card-details">
+              <h4 class="prop-title">شقة فاخرة F4 مطلة على البحر</h4>
+              <p class="prop-location">📍 وهران، حي الحبيب</p>
+              <div class="prop-specs">
+                <span>🛏️ 3 غرف</span>
+                <span>📐 120 م²</span>
+                <span>🚿 2 حمام</span>
+              </div>
+              <div class="card-footer">
+                <div class="price">45,000 د.ج <span>/ شهر</span></div>
+                <button class="view-btn">التفاصيل</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة عقار 2 -->
+          <div class="property-card">
+            <div class="card-image">
+              <span class="badge badge-blue">للبيع</span>
+              <div class="placeholder-img">صورة العقار</div>
+            </div>
+            <div class="card-details">
+              <h4 class="prop-title">فيلا حديثة بالطابقين وحديقة</h4>
+              <p class="prop-location">📍 الجزائر العاصمة، الشراقة</p>
+              <div class="prop-specs">
+                <span>🛏️ 5 غرف</span>
+                <span>📐 350 م²</span>
+                <span>🚗 كراج</span>
+              </div>
+              <div class="card-footer">
+                <div class="price">3.2 مليار <span>د.ج</span></div>
+                <button class="view-btn">التفاصيل</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة عقار 3 -->
+          <div class="property-card">
+            <div class="card-image">
+              <span class="badge badge-teal">للكراء</span>
+              <div class="placeholder-img">صورة العقار</div>
+            </div>
+            <div class="card-details">
+              <h4 class="prop-title">محل تجاري في موقع استراتيجي</h4>
+              <p class="prop-location">📍 قسنطينة، وسط المدينة</p>
+              <div class="prop-specs">
+                <span>📐 75 م²</span>
+                <span>🏢 طابق أرضي</span>
+              </div>
+              <div class="card-footer">
+                <div class="price">80,000 د.ج <span>/ شهر</span></div>
+                <button class="view-btn">التفاصيل</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
