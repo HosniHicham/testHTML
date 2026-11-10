@@ -516,3 +516,93 @@
 .nav-item.active, .nav-item:hover {
   color: var(--accent-teal);
 }
+/* تنسيقات شاشة الخريطة */
+.map-container-screen {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 65px - 60px);
+  overflow: hidden;
+}
+
+.mock-map-view {
+  width: 100%;
+  height: 100%;
+  background: #111827;
+  position: relative;
+  background-image: radial-gradient(#1f293d 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.map-title-header {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* دبابيس العقارات على الخريطة */
+.map-pin {
+  position: absolute;
+  background: var(--bg-card);
+  border: 2px solid var(--accent-teal);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transition: var(--transition);
+}
+
+.map-pin:hover {
+  background: var(--accent-teal);
+  color: white;
+  transform: scale(1.1);
+}
+
+.pin-1 { top: 35%; right: 40%; }
+.pin-2 { top: 60%; left: 30%; }
+.pin-3 { top: 25%; left: 20%; }
+
+/* أزرار التحكم بالخريطة */
+.map-controls {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+.map-ctrl-btn {
+  width: 38px;
+  height: 38px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.map-ctrl-btn:hover {
+  background: var(--accent-teal);
+}
+
+.map-watermark {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  background: rgba(15, 23, 42, 0.7);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
