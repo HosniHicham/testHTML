@@ -3,142 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المنصة العقارية - الرئيسية</title>
+  <title>DarKira الجزائر - شاشة الترحيب</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="splash-body">
 
-  <!-- الشريط العلوي Navigation -->
-  <header class="navbar">
-    <div class="nav-brand">
-      <div class="logo-icon sm">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        </svg>
+  <div class="splash-container">
+    <div class="glow-bg"></div>
+
+    <div class="splash-card">
+      <!-- الشعار وهوية التطبيق -->
+      <div class="splash-brand">
+        <div class="brand-logo-text">
+          <span class="dk-prefix">Dar</span><span class="dk-main">Kira</span>
+        </div>
+        <h1 class="brand-title">الجزائر</h1>
+        <p class="brand-tagline">Our Rental Home Algeria</p>
       </div>
-      <span>العقارية DZ</span>
+
+      <!-- الرسم التوضيحي/أيقونة الهوية الجزائرية والمعمارية -->
+      <div class="hero-illustration">
+        <div class="monument-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- أزرار الإجراءات والانتقال -->
+      <div class="action-box">
+        <a href="home.html" class="primary-btn">
+          <span>استكشاف العقارات مباشرة</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+
+        <div class="auth-switch-box">
+          <button class="secondary-btn" onclick="openAuthModal('login')">تسجيل الدخول</button>
+          <button class="outline-btn" onclick="openAuthModal('register')">إنشاء حساب جديد</button>
+        </div>
+      </div>
+
+      <div class="splash-footer">
+        منصة مخصصة للكراء والسكن الموثق في الجزائر &copy; 2026
+      </div>
     </div>
+  </div>
 
-    <nav class="nav-links">
-      <a href="index.html" class="active">الرئيسية</a>
-      <a href="#">العقارات</a>
-      <a href="#">المفضلة</a>
-    </nav>
+  <!-- النافذة المنبثقة للتسجيل وتغيير الوضع دون مغادرة الصفحة -->
+  <div id="auth-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+      
+      <div class="modal-tabs">
+        <button id="tab-login" class="modal-tab active" onclick="toggleModalForm('login')">تسجيل الدخول</button>
+        <button id="tab-register" class="modal-tab" onclick="toggleModalForm('register')">حساب جديد</button>
+      </div>
 
-    <div class="user-action">
-      <a href="add-property.html" class="add-prop-btn">+ إضافة عقار</a>
-    </div>
-  </header>
+      <!-- نموذج الدخول -->
+      <form id="modal-login-form" class="modal-form active" onsubmit="event.preventDefault(); window.location.href='home.html';">
+        <div class="input-group">
+          <label>البريد الإلكتروني أو رقم الهاتف</label>
+          <input type="text" placeholder="05XX XX XX XX" required>
+        </div>
+        <div class="input-group">
+          <label>كلمة المرور</label>
+          <input type="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="submit-btn">دخول</button>
+      </form>
 
-  <!-- محتوى الصفحة الرئيسي -->
-  <main class="main-container">
-
-    <!-- قسم البحث والفلترة -->
-    <section class="filter-section">
-      <div class="filter-box">
-        <div class="filter-group">
-          <label>نوع العملية</label>
-          <select id="filter-type">
-            <option value="all">الكل</option>
-            <option value="rent">للكراء</option>
-            <option value="sale">للبيع</option>
+      <!-- نموذج إنشاء حساب -->
+      <form id="modal-register-form" class="modal-form" onsubmit="event.preventDefault(); window.location.href='home.html';">
+        <div class="input-group">
+          <label>الاسم الكامل</label>
+          <input type="text" placeholder="أحمد محمد" required>
+        </div>
+        <div class="input-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" placeholder="05XX XX XX XX" required>
+        </div>
+        <div class="input-group">
+          <label>نوع الحساب</label>
+          <select>
+            <option value="tenant">مستأجر / باحث عن سكن</option>
+            <option value="landlord">مؤجر / صاحب عقار</option>
           </select>
         </div>
-
-        <div class="filter-group">
-          <label>نوع العقار</label>
-          <select id="filter-category">
-            <option value="all">جميع الأنواع</option>
-            <option value="apartment">شقة (F3 / F4)</option>
-            <option value="villa">فيلا</option>
-            <option value="commercial">محل تجاري</option>
-          </select>
+        <div class="input-group">
+          <label>كلمة المرور</label>
+          <input type="password" placeholder="••••••••" required>
         </div>
-
-        <div class="filter-group">
-          <label>الولاية</label>
-          <input type="text" placeholder="مثال: الجزائر، وهران..." id="filter-location">
-        </div>
-
-        <button class="search-btn">بحث متقدم</button>
-      </div>
-    </section>
-
-    <!-- شبكة عرض العقارات (Property Grid) -->
-    <section class="properties-section">
-      <h3 class="section-title">العقارات المتاحة حديثاً</h3>
-
-      <div class="properties-grid">
-
-        <!-- بطاقة عقار 1 -->
-        <div class="property-card">
-          <div class="card-image">
-            <span class="badge badge-teal">للكراء</span>
-            <div class="placeholder-img">صورة العقار</div>
-          </div>
-          <div class="card-details">
-            <h4 class="prop-title">شقة فاخرة F4 مطلة على البحر</h4>
-            <p class="prop-location">📍 وهران، حي الحبيب</p>
-            <div class="prop-specs">
-              <span>🛏️ 3 غرف</span>
-              <span>📐 120 م²</span>
-              <span>🚿 2 حمام</span>
-            </div>
-            <div class="card-footer">
-              <div class="price">45,000 د.ج <span>/ شهر</span></div>
-              <a href="property-details.html" class="view-btn">التفاصيل</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- بطاقة عقار 2 -->
-        <div class="property-card">
-          <div class="card-image">
-            <span class="badge badge-blue">للبيع</span>
-            <div class="placeholder-img">صورة العقار</div>
-          </div>
-          <div class="card-details">
-            <h4 class="prop-title">فيلا حديثة بالطابقين وحديقة</h4>
-            <p class="prop-location">📍 الجزائر العاصمة، الشراقة</p>
-            <div class="prop-specs">
-              <span>🛏️ 5 غرف</span>
-              <span>📐 350 م²</span>
-              <span>🚗 كراج</span>
-            </div>
-            <div class="card-footer">
-              <div class="price">3.2 مليار <span>د.ج</span></div>
-              <a href="property-details.html" class="view-btn">التفاصيل</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- بطاقة عقار 3 -->
-        <div class="property-card">
-          <div class="card-image">
-            <span class="badge badge-teal">للكراء</span>
-            <div class="placeholder-img">صورة العقار</div>
-          </div>
-          <div class="card-details">
-            <h4 class="prop-title">محل تجاري في موقع استراتيجي</h4>
-            <p class="prop-location">📍 قسنطينة، وسط المدينة</p>
-            <div class="prop-specs">
-              <span>📐 75 م²</span>
-              <span>🏢 طابق أرضي</span>
-            </div>
-            <div class="card-footer">
-              <div class="price">80,000 د.ج <span>/ شهر</span></div>
-              <a href="property-details.html" class="view-btn">التفاصيل</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
+        <button type="submit" class="submit-btn">تأكيد الحساب</button>
+      </form>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
