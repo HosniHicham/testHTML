@@ -20,6 +20,13 @@
   font-family: 'Cairo', sans-serif;
 }
 
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* ==================== 1. شاشة الترحيب والتسجيل ==================== */
 .splash-body {
   background-color: var(--bg-main);
   color: var(--text-primary);
@@ -165,7 +172,7 @@
   color: var(--text-secondary);
 }
 
-/* Modal Popup Styles */
+/* ==================== 2. النوافذ المنبثقة Modal Popup ==================== */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -270,8 +277,10 @@
   font-weight: 700;
   cursor: pointer;
   margin-top: 0.5rem;
+  width: 100%;
 }
-/* تنسيقات القائمة الرئيسية */
+
+/* ==================== 3. القائمة الرئيسية والشريط العلوي ==================== */
 .app-body {
   background-color: var(--bg-main);
   color: var(--text-primary);
@@ -339,7 +348,7 @@
   width: 100%;
 }
 
-/* فلاتر سريعة */
+/* ==================== 4. الفلاتر السريعة والعقارات ==================== */
 .quick-filters-row {
   display: flex;
   gap: 0.75rem;
@@ -387,7 +396,6 @@
   text-decoration: none;
 }
 
-/* الكروت الأفقية المميزة */
 .horizontal-scroll-cards {
   display: flex;
   gap: 1rem;
@@ -430,7 +438,6 @@
   font-size: 0.9rem;
 }
 
-/* شبكة الإعلانات العادية */
 .grid-listings {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -489,7 +496,19 @@
   color: var(--text-secondary);
 }
 
-/* شريط التنقل السفلي */
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.badge-teal { background: var(--accent-teal); color: white; }
+.badge-blue { background: var(--accent-blue); color: #0F172A; }
+
+/* ==================== 5. شريط التنقل السفلي Bottom Navigation ==================== */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -516,7 +535,8 @@
 .nav-item.active, .nav-item:hover {
   color: var(--accent-teal);
 }
-/* تنسيقات شاشة الخريطة */
+
+/* ==================== 6. تنسيقات شاشة الخريطة التفاعلية ==================== */
 .map-container-screen {
   flex: 1;
   position: relative;
@@ -540,7 +560,6 @@
   color: var(--text-secondary);
 }
 
-/* دبابيس العقارات على الخريطة */
 .map-pin {
   position: absolute;
   background: var(--bg-card);
@@ -565,7 +584,6 @@
 .pin-2 { top: 60%; left: 30%; }
 .pin-3 { top: 25%; left: 20%; }
 
-/* أزرار التحكم بالخريطة */
 .map-controls {
   position: absolute;
   bottom: 80px;
@@ -605,4 +623,3 @@
   padding: 2px 6px;
   border-radius: 4px;
 }
-
