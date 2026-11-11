@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <meta name="description" content="عقار AQAR الجزائر — تصفح جميع العقارات والفرص الاستثمارية المتاحة للبيع والإيجار.">
+  <title>جميع العقارات | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1500px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+    .nav-links a.active{border-bottom:2px solid var(--teal)}
+
+    .nav-actions{display:flex;align-items:center;gap:10px}
+
+    .btn{
+      border:0;border-radius:24px;padding:10px 20px;
+      font-weight:800;transition:.2s
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30
+    }
+    .btn-primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
+    .btn-ghost{background:#102941;border:1px solid var(--line);color:white}
+
+    /* Page Header */
+    .page-header {
+      padding: 30px 0 10px;
+    }
+    .page-header h1 {
+      font-size: 28px;
+      margin: 0 0 5px;
+      font-weight: 900;
+    }
+    .page-header p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Layout & Filters */
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 20px;
+      padding: 20px 0 50px;
+    }
+
+    .filters-sidebar {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      height: fit-content;
+    }
+
+    .filters-sidebar h3 {
+      font-size: 16px;
+      margin: 0 0 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: #42d8d0;
+    }
+
+    .filter-group {
+      margin-bottom: 15px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .filter-group select, .filter-group input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      outline: none;
+    }
+
+    .filter-group select:focus, .filter-group input:focus {
+      border-color: var(--teal);
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .filter-actions button {
+      flex: 1;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    /* Results Area */
+    .results-content {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .results-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .listing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+
+    .property-card{
+      background:#f7fafc;color:#142536;border-radius:14px;
+      overflow:hidden;box-shadow:var(--shadow);position:relative
+    }
+
+    .property-image{height:165px;position:relative;background:#dbe5ed}
+    .property-image img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .tag{
+      position:absolute;top:11px;right:11px;border-radius:18px;
+      padding:4px 12px;color:white;font-size:12px;font-weight:800
+    }
+    .tag.sale{background:var(--green)}
+    .tag.rent{background:var(--blue)}
+
+    .property-info{padding:12px}
+    .price{font-size:18px;color:#087c7c;font-weight:900;margin:0}
+    .property-title{font-size:13px;font-weight:800;margin:4px 0 8px;min-height:26px}
+
+    .property-type{
+      display:inline-block;background:#e3f5f3;color:#087c7c;
+      border-radius:20px;padding:2px 8px;font-size:10px;
+      font-weight:800;margin-bottom:8px
+    }
+
+    .features{
+      display:flex;flex-wrap:wrap;gap:8px;
+      color:#667887;font-size:11px;margin-bottom:10px
+    }
+
+    .property-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .location{font-size:11px;color:#627383}
+
+    .details-btn{
+      border:0;border-radius:22px;background:#078e8b;color:#fff;
+      padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer;
+      transition:.2s
+    }
+    .details-btn:hover { background: #056a68; }
+
+    .empty{display:none;color:#b8c9d8;text-align:center;padding:40px;grid-column:1/-1}
+
+    /* Footer */
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px;margin-top:40px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:20px;flex-wrap:wrap}
+
+    @media(max-width:950px){
+      .catalog-layout { grid-template-columns: 1fr; }
+      .listing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media(max-width:600px){
+      .listing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">
+        عقار | AQAR
+        <small>AQAR ALGERIA</small>
+      </span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a class="active" href="properties.html">العقارات</a>
+      <a href="../index.html#mapSection">الخريطة</a>
+      <a href="../index.html#about">حول المنصة</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn btn-primary" onclick="alert('واجهة تسجيل الدخول والتسجيل')">♙ دخول</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page-header">
+    <h1>دليل العقارات الشامل</h1>
+    <p>تصفح مئات العقارات السكنية، التجارية، الصناعية والفلاحية عبر مختلف ولايات الوطن</p>
+  </div>
+
+  <div class="catalog-layout">
+    <!-- Sidebar Filters -->
+    <aside class="filters-sidebar">
+      <h3>تصفية البحث</h3>
+      <div class="filter-group">
+        <label>ابحث بالكلمة المفتاحية</label>
+        <input type="text" id="filterKeyword" placeholder="مدينة، حي، مواصفات...">
+      </div>
+
+      <div class="filter-group">
+        <label>نوع المعاملة</label>
+        <select id="filterDeal">
+          <option value="">جميع المعاملات</option>
+          <option value="للبيع">للبيع</option>
+          <option value="للإيجار">للإيجار</option>
+          <option value="للاستثمار">للاستثمار</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>المجال العقاري</label>
+        <select id="filterCategory">
+          <option value="">جميع المجالات</option>
+          <option value="سكني">سكني</option>
+          <option value="تجاري">تجاري</option>
+          <option value="صناعي">صناعي</option>
+          <option value="فلاحي">فلاحي</option>
+          <option value="سياحي">سياحي</option>
+          <option value="استثماري">استثماري</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>الولاية / المدينة</label>
+        <select id="filterCity">
+          <option value="">جميع الولايات</option>
+          <option value="الجزائر العاصمة">الجزائر العاصمة</option>
+          <option value="وهران">وهران</option>
+          <option value="قسنطينة">قسنطينة</option>
+          <option value="سطيف">سطيف</option>
+          <option value="البليدة">البليدة</option>
+          <option value="تيبازة">تيبازة</option>
+          <option value="معسكر">معسكر</option>
+        </select>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn btn-ghost" onclick="resetFilters()">إعادة ضبط</button>
+        <button class="btn btn-primary" onclick="applyFilters()">تطبيق</button>
+      </div>
+    </aside>
+
+    <!-- Main Results Section -->
+    <main class="results-content">
+      <div class="results-toolbar">
+        <span id="resultsCount">جاري تحميل العقارات...</span>
+        <span>الترتيب: الافتراضي</span>
+      </div>
+
+      <div class="listing-grid" id="catalogGrid"></div>
+      <div class="empty" id="catalogEmpty">لا توجد عقارات مطابقة لخيارات البحث الحالية.</div>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+    <div class="footer-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="#">سياسة الخصوصية</a>
+    </div>
+    <span>© 2026 عقار AQAR الجزائر</span>
+  </div>
+</footer>
+
+<script>
+  // قاعدة بيانات العقارات المشتركة
+  const properties = [
+    { id:1, type:"فيلا", category:"سكني", deal:"للبيع", price:"45,000,000 دج", title:"فيلا فاخرة في الجزائر العاصمة", city:"الجزائر العاصمة", rooms:6, area:300, image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85" },
+    { id:2, type:"شقة", category:"سكني", deal:"للإيجار", price:"70,000 دج / شهر", title:"شقة F4 للإيجار في وهران", city:"وهران", rooms:4, area:120, image:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85" },
+    { id:3, type:"أرض سكنية", category:"فلاحي", deal:"للبيع", price:"8,500,000 دج", title:"أرض للبناء في البليدة", city:"البليدة", rooms:0, area:500, image:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=85" },
+    { id:4, type:"محل تجاري", category:"تجاري", deal:"للبيع", price:"16,000,000 دج", title:"محل تجاري بموقع حيوي", city:"قسنطينة", rooms:1, area:85, image:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=85" },
+    { id:5, type:"شقة", category:"سكني", deal:"للبيع", price:"13,500,000 دج", title:"شقة عائلية بإطلالة جميلة", city:"سطيف", rooms:3, area:95, image:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85" },
+    { id:6, type:"مكتب", category:"تجاري", deal:"للإيجار", price:"55,000 دج / شهر", title:"مكتب إداري مجهز", city:"تيبازة", rooms:2, area:70, image:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85" },
+    { id:7, type:"مستودع", category:"صناعي", deal:"للإيجار", price:"180,000 دج / شهر", title:"مستودع صناعي بمساحة واسعة", city:"وهران", rooms:0, area:800, image:"https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=85" },
+    { id:8, type:"فندق", category:"سياحي", deal:"للاستثمار", price:"حسب الاتفاق", title:"فرصة استثمارية في قطاع السياحة", city:"تيبازة", rooms:25, area:1500, image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85" },
+    { id:9, type:"أرض فلاحية", category:"فلاحي", deal:"للبيع", price:"حسب الاتفاق", title:"أرض فلاحية واسعة", city:"معسكر", rooms:0, area:10000, image:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=85" }
+  ];
+
+  const grid = document.getElementById("catalogGrid");
+  const empty = document.getElementById("catalogEmpty");
+  const countSpan = document.getElementById("resultsCount");
+
+  function renderCatalog(items) {
+    grid.innerHTML = "";
+    empty.style.display = items.length ? "none" : "block";
+    countSpan.textContent = `تم العثور على ${items.length} عقار متاح`;
+
+    items.forEach(p => {
+      const card = document.createElement("article");
+      card.className = "property-card";
+      const roomsText = p.rooms > 0 ? p.rooms + " غرف" : "—";
+
+      card.innerHTML = `
+        <div class="property-image">
+          <img src="${p.image}" alt="${p.title}" loading="lazy">
+          <span class="tag ${p.deal === "للبيع" ? "sale" : "rent"}">${p.deal}</span>
+        </div>
+        <div class="property-info">
+          <p class="price">${p.price}</p>
+          <div class="property-title">${p.title}</div>
+          <span class="property-type">${p.category}</span>
+          <div class="features">
+            <span>▣ ${roomsText}</span>
+            <span>▱ ${p.area} م²</span>
+            <span>⌖ ${p.type}</span>
+          </div>
+          <div class="property-foot">
+            <span class="location">📍 ${p.city}</span>
+            <button class="details-btn" onclick="alert('فتح صفحة التفاصيل للعقار رقم: ${p.id}')">التفاصيل ←</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function applyFilters() {
+    const keyword = document.getElementById("filterKeyword").value.trim().toLowerCase();
+    const deal = document.getElementById("filterDeal").value;
+    const category = document.getElementById("filterCategory").value;
+    const city = document.getElementById("filterCity").value;
+
+    const filtered = properties.filter(p => {
+      const textMatch = !keyword || `${p.title} ${p.city} ${p.type}`.toLowerCase().includes(keyword);
+      const dealMatch = !deal || p.deal === deal;
+      const catMatch = !category || p.category === category;
+      const cityMatch = !city || p.city === city;
+      return textMatch && dealMatch && catMatch && cityMatch;
+    });
+
+    renderCatalog(filtered);
+  }
+
+  function resetFilters() {
+    document.getElementById("filterKeyword").value = "";
+    document.getElementById("filterDeal").value = "";
+    document.getElementById("filterCategory").value = "";
+    document.getElementById("filterCity").value = "";
+    renderCatalog(properties);
+  }
+
+  // تشغيل أولي
+  renderCatalog(properties);
+</script>
+
+</body>
+</html>

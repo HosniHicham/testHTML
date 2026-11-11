@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <title>دليل العقارات والولايات | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --gold:#d4af37;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1400px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    /* Section Header */
+    .cities-header {
+      padding: 50px 0 30px;
+      text-align: center;
+    }
+
+    .cities-header h1 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 900;
+      margin: 0 0 12px;
+    }
+
+    .cities-header h1 span { color: var(--teal); }
+
+    .cities-header p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Search Bar */
+    .wilaya-search {
+      max-width: 500px;
+      margin: 25px auto 0;
+      position: relative;
+    }
+
+    .wilaya-search input {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 14px 20px;
+      border-radius: 30px;
+      outline: none;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .wilaya-search input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 20px rgba(8, 182, 173, 0.2);
+    }
+
+    /* Grid */
+    .cities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 22px;
+      padding: 30px 0 80px;
+    }
+
+    .city-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: .3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .city-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--teal);
+      box-shadow: var(--shadow);
+    }
+
+    .city-img {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .city-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .3s;
+    }
+
+    .city-card:hover .city-img img {
+      transform: scale(1.05);
+    }
+
+    .city-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(6, 22, 41, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      color: var(--teal);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .city-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .city-body h3 {
+      font-size: 18px;
+      font-weight: 900;
+      margin: 0 0 6px;
+    }
+
+    .city-body p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 15px;
+    }
+
+    .city-stats {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .city-stats strong { color: var(--text); }
+
+    .btn{
+      border:0;border-radius:20px;padding:9px 18px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:6px
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30;width:100%;margin-top:15px;
+    }
+    .btn-primary:hover{filter:brightness(1.12);}
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    @media(max-width: 600px) {
+      .cities-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+      <a class="active" href="cities.html">دليل الولايات</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  
+  <div class="cities-header">
+    <h1>استكشف العقارات حسب <span>الولايات والمدن</span></h1>
+    <p>تصفح الفرص السكنية والتجارية والاستثمارية عبر 58 ولاية جزائرية بدقة عالية</p>
+    
+    <div class="wilaya-search">
+      <input type="text" id="searchInput" placeholder="ابحث عن ولاية (مثلاً: وهران، العاصمة، قسنطينة)..." oninput="filterWilayas()">
+    </div>
+  </div>
+
+  <div class="cities-grid" id="wilayasContainer">
+    
+    <!-- Oran -->
+    <div class="city-card" data-name="وهران 31">
+      <div class="city-img">
+        <span class="city-badge">ولاية 31</span>
+        <img src="https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=600&q=80" alt="وهران">
+      </div>
+      <div class="city-body">
+        <div>
+          <h3>وهران (Oran)</h3>
+          <p>الباهية • الصديقية، عين الترك، بئر الجير</p>
+        </div>
+        <div class="city-stats">
+          <span>الإعلانات المتاحة: <strong>342 عقار</strong></span>
+          <span>متوسط السعر: <strong>14.5 م.دج</strong></span>
+        </div>
+        <a href="properties.html?wilaya=31" class="btn btn-primary">تصفح عقارات وهران ←</a>
+      </div>
+    </div>
+
+    <!-- Algiers -->
+    <div class="city-card" data-name="الجزائر العاصمة 16">
+      <div class="city-img">
+        <span class="city-badge">ولاية 16</span>
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="الجزائر">
+      </div>
+      <div class="city-body">
+        <div>
+          <h3>الجزائر العاصمة (Algiers)</h3>
+          <p>البهجة • حيدرة، دالي إبراهيم، الشراقة</p>
+        </div>
+        <div class="city-stats">
+          <span>الإعلانات المتاحة: <strong>518 عقار</strong></span>
+          <span>متوسط السعر: <strong>22.0 م.دج</strong></span>
+        </div>
+        <a href="properties.html?wilaya=16" class="btn btn-primary">تصفح عقارات العاصمة ←</a>
+      </div>
+    </div>
+
+    <!-- Constantine -->
+    <div class="city-card" data-name="قسنطينة 25">
+      <div class="city-img">
+        <span class="city-badge">ولاية 25</span>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="قسنطينة">
+      </div>
+      <div class="city-body">
+        <div>
+          <h3>قسنطينة (Constantine)</h3>
+          <p>مدينة الجسور • علي منجلي، زواغي، الماضوي</p>
+        </div>
+        <div class="city-stats">
+          <span>الإعلانات المتاحة: <strong>185 عقار</strong></span>
+          <span>متوسط السعر: <strong>11.8 م.دج</strong></span>
+        </div>
+        <a href="properties.html?wilaya=25" class="btn btn-primary">تصفح عقارات قسنطينة ←</a>
+      </div>
+    </div>
+
+    <!-- Setif -->
+    <div class="city-card" data-name="سطيف 19">
+      <div class="city-img">
+        <span class="city-badge">ولاية 19</span>
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80" alt="سطيف">
+      </div>
+      <div class="city-body">
+        <div>
+          <h3>سطيف (Sétif)</h3>
+          <p>عاصمة الهضاب • العلمة، الهضاب، وسط المدينة</p>
+        </div>
+        <div class="city-stats">
+          <span>الإعلانات المتاحة: <strong>140 عقار</strong></span>
+          <span>متوسط السعر: <strong>13.2 م.دج</strong></span>
+        </div>
+        <a href="properties.html?wilaya=19" class="btn btn-primary">تصفح عقارات سطيف ←</a>
+      </div>
+    </div>
+
+    <!-- Annaba -->
+    <div class="city-card" data-name="عنابة 23">
+      <div class="city-img">
+        <span class="city-badge">ولاية 23</span>
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80" alt="عنابة">
+      </div>
+      <div class="city-body">
+        <div>
+          <h3>عنابة (Annaba)</h3>
+          <p>بونة • عنابة وسط، سيدي عيسى، البوني</p>
+        </div>
+        <div class="city-stats">
+          <span>الإعلانات المتاحة: <strong>126 عقار</strong></span>
+          <span>متوسط السعر: <strong>15.0 م.دج</strong></span>
+        </div>
+        <a href="properties.html?wilaya=23" class="btn btn-primary">تصفح عقارات عنابة ←</a>
+      </div>
+    </div>
+
+    <!-- Blida -->
+    <div class="city-card" data-name="البليدة 09">
+      <div class="city-img">
+        <span class="city-badge">ولاية 09</span>
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80" alt="البليدة">
+      </div>
+      <div class="city-body">
+        <div>
+          <h3>البليدة (Blida)</h3>
+          <p>مدينة الورود • بوفاريك، أولاد يعيش، وسط البليدة</p>
+        </div>
+        <div class="city-stats">
+          <span>الإعلانات المتاحة: <strong>112 عقار</strong></span>
+          <span>متوسط السعر: <strong>16.4 م.دج</strong></span>
+        </div>
+        <a href="properties.html?wilaya=09" class="btn btn-primary">تصفح عقارات البليدة ←</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function filterWilayas() {
+    const input = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.city-card');
+
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name').toLowerCase();
+      if (name.includes(input)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

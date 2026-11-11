@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <title>مقارنة العقارات | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --danger:#ef4444;
+      --gold:#d4af37;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1400px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    /* Section Header */
+    .compare-header {
+      padding: 50px 0 30px;
+      text-align: center;
+    }
+
+    .compare-header h1 {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 900;
+      margin: 0 0 12px;
+    }
+
+    .compare-header h1 span { color: var(--teal); }
+
+    .compare-header p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Comparison Table Container */
+    .compare-wrapper {
+      padding: 20px 0 80px;
+      overflow-x: auto;
+    }
+
+    .compare-table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .compare-table th, .compare-table td {
+      padding: 18px 20px;
+      text-align: right;
+      border-bottom: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      vertical-align: middle;
+      font-size: 14px;
+    }
+
+    .compare-table th:last-child, .compare-table td:last-child {
+      border-left: none;
+    }
+
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .feature-label {
+      background: var(--panel2);
+      width: 220px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .prop-header-cell {
+      position: relative;
+      text-align: center !important;
+      padding-top: 25px !important;
+    }
+
+    .remove-prop-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      transition: .2s;
+    }
+
+    .remove-prop-btn:hover {
+      background: var(--danger);
+      color: white;
+    }
+
+    .prop-img {
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
+    .prop-title {
+      font-weight: 900;
+      font-size: 15px;
+      margin: 0 0 6px;
+    }
+
+    .prop-price {
+      color: var(--teal);
+      font-weight: 900;
+      font-size: 16px;
+    }
+
+    .badge-doc {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(18, 201, 130, 0.12);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .btn{
+      border:0;border-radius:20px;padding:9px 18px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:6px
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30;width:100%;
+    }
+    .btn-primary:hover{filter:brightness(1.12);}
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+      <a class="active" href="compare.html">المقارنة</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  
+  <div class="compare-header">
+    <h1>مقارنة <span>العقارات المحددة</span></h1>
+    <p>قارن بين المواصفات، الأسعار، نوع الوثائق، والتجهيزات لاتخاذ القرار الاستثماري الأنسب</p>
+  </div>
+
+  <div class="compare-wrapper">
+    <table class="compare-table" id="compareTable">
+      <thead>
+        <tr>
+          <th class="feature-label">العقار</th>
+          
+          <!-- Column 1 -->
+          <th class="prop-header-cell col-1">
+            <button class="remove-prop-btn" onclick="removeColumn(1)">✕</button>
+            <img class="prop-img" src="https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=400&q=80" alt="شقة بوهران">
+            <h3 class="prop-title">شقة F4 عصرية بوهران</h3>
+            <div class="prop-price">18,500,000 دج</div>
+          </th>
+
+          <!-- Column 2 -->
+          <th class="prop-header-cell col-2">
+            <button class="remove-prop-btn" onclick="removeColumn(2)">✕</button>
+            <img class="prop-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80" alt="فيلا بقسنطينة">
+            <h3 class="prop-title">فيلا راقية بقسنطينة</h3>
+            <div class="prop-price">42,000,000 دج</div>
+          </th>
+
+          <!-- Column 3 -->
+          <th class="prop-header-cell col-3">
+            <button class="remove-prop-btn" onclick="removeColumn(3)">✕</button>
+            <img class="prop-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80" alt="شقة بالعاصمة">
+            <h3 class="prop-title">شقة F3 بحيدرة</h3>
+            <div class="prop-price">26,000,000 دج</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feature-label">الولاية والبلدية</td>
+          <td class="col-1">وهران • بئر الجير</td>
+          <td class="col-2">قسنطينة • علي منجلي</td>
+          <td class="col-3">الجزائر • حيدرة</td>
+        </tr>
+        <tr>
+          <td class="feature-label">المساحة الإجمالية</td>
+          <td class="col-1">135 م²</td>
+          <td class="col-2">320 م²</td>
+          <td class="col-3">105 م²</td>
+        </tr>
+        <tr>
+          <td class="feature-label">عدد الغرف والمرافق</td>
+          <td class="col-1">4 غرف + صالون + حمامين</td>
+          <td class="col-2">6 غرف + حديقة + كراج</td>
+          <td class="col-3">3 غرف + صالون</td>
+        </tr>
+        <tr>
+          <td class="feature-label">الوثائق القانونية</td>
+          <td class="col-1"><span class="badge-doc">عقد توثيقي + دفتر عقاري</span></td>
+          <td class="col-2"><span class="badge-doc">عقد توثيقي + دفتر عقاري</span></td>
+          <td class="col-3"><span class="badge-doc">عقد ملكية فردي</span></td>
+        </tr>
+        <tr>
+          <td class="feature-label">الطابق والواجهة</td>
+          <td class="col-1">الطابق 3 (واجهتان)</td>
+          <td class="col-2">طابقين + أرضي (4 واجهات)</td>
+          <td class="col-3">الطابق 2 (واجهة واحدة)</td>
+        </tr>
+        <tr>
+          <td class="feature-label">التجهيزات المتوفرة</td>
+          <td class="col-1">مصعد، غاز، خزان ماء، تدفئة مركزية</td>
+          <td class="col-2">مسبح، تدفئة، كاميرات مراقبة، مرآب</td>
+          <td class="col-3">مصعد، حراسة، خزان ماء</td>
+        </tr>
+        <tr>
+          <td class="feature-label">التواصل والتفاصيل</td>
+          <td class="col-1"><a href="property-details.html" class="btn btn-primary">معاينة العقار 🔍</a></td>
+          <td class="col-2"><a href="property-details.html" class="btn btn-primary">معاينة العقار 🔍</a></td>
+          <td class="col-3"><a href="property-details.html" class="btn btn-primary">معاينة العقار 🔍</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function removeColumn(colIndex) {
+    const cells = document.querySelectorAll(`.col-${colIndex}`);
+    cells.forEach(cell => cell.remove());
+  }
+</script>
+
+</body>
+</html>

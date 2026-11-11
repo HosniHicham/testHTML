@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <title>العقارات المفضلة | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --danger:#ef4444;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1500px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    .user-profile-badge {
+      display: flex; align-items: center; gap: 10px; background: var(--panel2);
+      border: 1px solid var(--line); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
+    }
+    .user-avatar {
+      width: 32px; height: 32px; background: var(--teal); border-radius: 50%;
+      display: grid; place-items: center; color: white; font-weight: 900; font-size: 14px;
+    }
+
+    .btn{
+      border:0;border-radius:24px;padding:9px 18px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;gap:6px
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30
+    }
+    .btn-primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
+    .btn-ghost{background:#102941;border:1px solid var(--line);color:white}
+    .btn-danger{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:var(--danger)}
+    .btn-danger:hover{background:var(--danger);color:white}
+
+    /* Dashboard Layout */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 25px;
+      padding: 30px 0 60px;
+    }
+
+    .dash-sidebar {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      height: fit-content;
+    }
+
+    .dash-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .dash-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: .2s;
+    }
+
+    .dash-menu a:hover, .dash-menu a.active {
+      background: var(--panel2);
+      color: #42d8d0;
+      border: 1px solid var(--line);
+    }
+
+    /* Panel Grid */
+    .panel-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-head h1 { font-size: 22px; margin: 0; font-weight: 900; color: #42d8d0; }
+
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .fav-card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: .2s;
+    }
+
+    .fav-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+
+    .fav-img-box {
+      height: 180px;
+      position: relative;
+    }
+
+    .fav-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .remove-fav {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(7, 24, 42, 0.8);
+      border: 1px solid var(--line);
+      color: #ff6b87;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .remove-fav:hover { background: #ff6b87; color: white; }
+
+    .fav-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .fav-price {
+      font-size: 18px;
+      color: var(--teal);
+      font-weight: 900;
+      margin: 0 0 5px;
+    }
+
+    .fav-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin: 0 0 10px;
+      color: var(--text);
+    }
+
+    .fav-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 15px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .fav-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--muted);
+      grid-column: 1 / -1;
+      display: none;
+    }
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    @media(max-width: 950px) {
+      .dashboard-layout { grid-template-columns: 1fr; }
+      .favorites-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+    </nav>
+
+    <div class="user-profile-badge">
+      <div class="user-avatar">هشـ</div>
+      <span>هشام حسني</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="dash-sidebar">
+      <ul class="dash-menu">
+        <li><a href="dashboard.html">📊 لوحة التحكم</a></li>
+        <li><a href="add-property.html">➕ إضافة عقار جديد</a></li>
+        <li><a href="my-listings.html">🏢 إعلاناتي (3)</a></li>
+        <li><a class="active" href="favorites.html">♥ العقارات المفضلة (2)</a></li>
+        <li><a href="messages.html">💬 الرسائل (2)</a></li>
+        <li><a href="profile.html">⚙️ إعدادات الحساب</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Favorites Area -->
+    <main class="panel-box">
+      <div class="panel-head">
+        <div>
+          <h1>العقارات المفضلة المحفوظة</h1>
+          <p style="margin:4px 0 0; color:var(--muted); font-size:13px;">العقارات التي قمت بحفظها للرجوع إليها لاحقاً</p>
+        </div>
+      </div>
+
+      <div class="favorites-grid" id="favoritesGrid">
+        
+        <!-- Fav Item 1 -->
+        <div class="fav-card" id="fav-1">
+          <div class="fav-img-box">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="صورة العقار">
+            <button class="remove-fav" onclick="removeFavorite(1)" title="إزالة من المفضلة">♥</button>
+          </div>
+          <div class="fav-content">
+            <div class="fav-price">68,000,000 دج</div>
+            <h3 class="fav-title">فيلا عصرية مع حديقة ومسبح في حيدرة</h3>
+            <div class="fav-meta">
+              <span>📍 حيدرة، الجزائر العاصمة</span>
+              <span>▱ 300 م²</span>
+            </div>
+            <div class="fav-actions">
+              <a href="property-details.html" class="btn btn-primary" style="flex:1; font-size:12px; justify-content:center;">عرض التفاصيل</a>
+              <button class="btn btn-ghost" style="font-size:12px;" onclick="alert('جاري التواصل مع المعلن...')">📞 اتصال</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fav Item 2 -->
+        <div class="fav-card" id="fav-2">
+          <div class="fav-img-box">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" alt="صورة العقار">
+            <button class="remove-fav" onclick="removeFavorite(2)" title="إزالة من المفضلة">♥</button>
+          </div>
+          <div class="fav-content">
+            <div class="fav-price">70,000 دج / شهرياً</div>
+            <h3 class="fav-title">شقة F4 للإيجار في وهران (حي الصديقية)</h3>
+            <div class="fav-meta">
+              <span>📍 الصديقية، وهران</span>
+              <span>▱ 120 م²</span>
+            </div>
+            <div class="fav-actions">
+              <a href="property-details.html" class="btn btn-primary" style="flex:1; font-size:12px; justify-content:center;">عرض التفاصيل</a>
+              <button class="btn btn-ghost" style="font-size:12px;" onclick="alert('جاري التواصل مع المعلن...')">📞 اتصال</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <h3>ليس لديك أي عقارات محفوظة في المفضلة حالياً.</h3>
+          <p style="margin-top: 8px; font-size: 13px;">تصفح العقارات واضغط على أيقونة القلب لحفظ ما يعجبك هنا.</p>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function removeFavorite(id) {
+    const card = document.getElementById(`fav-${id}`);
+    if (card) {
+      card.remove();
+      
+      // التحقق مما إذا كانت القائمة فارغة
+      const remaining = document.querySelectorAll('.fav-card');
+      if (remaining.length === 0) {
+        document.getElementById('emptyState').style.display = 'block';
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

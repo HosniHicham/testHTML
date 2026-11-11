@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <title>الملف الشخصي | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --danger:#ef4444;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1500px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    .user-profile-badge {
+      display: flex; align-items: center; gap: 10px; background: var(--panel2);
+      border: 1px solid var(--line); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
+    }
+    .user-avatar {
+      width: 32px; height: 32px; background: var(--teal); border-radius: 50%;
+      display: grid; place-items: center; color: white; font-weight: 900; font-size: 14px;
+    }
+
+    .btn{
+      border:0;border-radius:24px;padding:10px 22px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30
+    }
+    .btn-primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
+    .btn-ghost{background:#102941;border:1px solid var(--line);color:white}
+
+    /* Dashboard Layout */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 25px;
+      padding: 30px 0 60px;
+    }
+
+    .dash-sidebar {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      height: fit-content;
+    }
+
+    .dash-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .dash-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: .2s;
+    }
+
+    .dash-menu a:hover, .dash-menu a.active {
+      background: var(--panel2);
+      color: #42d8d0;
+      border: 1px solid var(--line);
+    }
+
+    /* Profile Panel */
+    .panel-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .panel-head {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-head h1 { font-size: 22px; margin: 0 0 5px; font-weight: 900; color: #42d8d0; }
+    .panel-head p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .profile-header-card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .profile-big-avatar {
+      width: 75px; height: 75px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 28px; font-weight: 900; color: white;
+      border: 3px solid var(--line);
+    }
+
+    .profile-user-info h3 { margin: 0 0 4px; font-size: 18px; font-weight: 900; }
+    .profile-user-info p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .form-group input, .form-group select {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 12px 15px;
+      border-radius: 12px;
+      outline: none;
+      transition: .2s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--teal);
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    @media(max-width: 950px) {
+      .dashboard-layout { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .profile-header-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+    </nav>
+
+    <div class="user-profile-badge">
+      <div class="user-avatar">هشـ</div>
+      <span>هشام حسني</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="dash-sidebar">
+      <ul class="dash-menu">
+        <li><a href="dashboard.html">📊 لوحة التحكم</a></li>
+        <li><a href="add-property.html">➕ إضافة عقار جديد</a></li>
+        <li><a href="my-listings.html">🏢 إعلاناتي (3)</a></li>
+        <li><a href="favorites.html">♥ العقارات المفضلة</a></li>
+        <li><a href="messages.html">💬 الرسائل (2)</a></li>
+        <li><a class="active" href="profile.html">⚙️ إعدادات الحساب</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Profile Panel -->
+    <main class="panel-box">
+      <div class="panel-head">
+        <h1>الملف الشخصي وإعدادات الحساب</h1>
+        <p>إدارة بياناتك الشخصية ومعلومات الاتصال الخاصة بك على المنصة</p>
+      </div>
+
+      <div class="profile-header-card">
+        <div class="profile-big-avatar">هشـ</div>
+        <div class="profile-user-info">
+          <h3>هشام حسني</h3>
+          <p>مستخدم مسجل • عضو في منصة عقار منذ نوفمبر 2026</p>
+          <span style="display:inline-block; margin-top:6px; background:rgba(18,201,130,.15); color:var(--green); padding:2px 10px; border-radius:12px; font-size:11px; font-weight:800;">حساب موثق ✓</span>
+        </div>
+      </div>
+
+      <form onsubmit="handleProfileUpdate(event)">
+        <div class="form-grid">
+          
+          <div class="form-group">
+            <label>الاسم الكامل</label>
+            <input type="text" id="fullName" value="هشام حسني" required>
+          </div>
+
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <input type="email" id="email" value="hisham.hosni@aqar-algeria.dz" required>
+          </div>
+
+          <div class="form-group">
+            <label>رقم الهاتف النقال</label>
+            <input type="tel" id="phone" value="+213 550 00 00 00" required>
+          </div>
+
+          <div class="form-group">
+            <label>الولاية الرئيسية</label>
+            <select id="wilaya">
+              <option value="وهران" selected>31 - وهران</option>
+              <option value="الجزائر العاصمة">16 - الجزائر العاصمة</option>
+              <option value="قسنطينة">25 - قسنطينة</option>
+              <option value="سطيف">19 - سطيف</option>
+              <option value="البليدة">09 - البليدة</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" onclick="alert('جاري الانتقال لتغيير كلمة المرور...')">🔒 تغيير كلمة المرور</button>
+          <button type="submit" class="btn btn-primary">💾 حفظ التعديلات</button>
+        </div>
+      </form>
+    </main>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function handleProfileUpdate(event) {
+    event.preventDefault();
+    alert('تم تحديث بيانات الملف الشخصي بنجاح!');
+  }
+</script>
+
+</body>
+</html>

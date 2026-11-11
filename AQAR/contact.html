@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <title>اتصل بنا | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1300px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    .btn{
+      border:0;border-radius:24px;padding:12px 24px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30;width:100%
+    }
+    .btn-primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
+
+    /* Contact Layout */
+    .contact-section {
+      padding: 50px 0 80px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 30px;
+    }
+
+    .contact-info-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 30px;
+    }
+
+    .contact-info-card h2 { font-size: 22px; margin: 0 0 10px; font-weight: 900; color: #42d8d0; }
+    .contact-info-card p { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0 0 25px; }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .info-icon {
+      width: 42px; height: 42px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      display: grid; place-items: center;
+      color: var(--teal); font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .info-text h4 { margin: 0 0 3px; font-size: 15px; font-weight: 800; }
+    .info-text p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .contact-form-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 30px;
+    }
+
+    .contact-form-card h2 { font-size: 22px; margin: 0 0 10px; font-weight: 900; }
+    .contact-form-card p { color: var(--muted); font-size: 14px; margin: 0 0 25px; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .form-group label { font-size: 13px; font-weight: 700; color: var(--text); }
+    .form-group input, .form-group textarea {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 12px 15px;
+      border-radius: 12px;
+      outline: none;
+      transition: .2s;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--teal); }
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    @media(max-width: 950px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+      <a class="active" href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container contact-section">
+  <div class="contact-grid">
+    
+    <!-- Contact Information Sidebar -->
+    <div class="contact-info-card">
+      <h2>تواصل مع فريق عقار</h2>
+      <p>نحن هنا لمساعدتك في كل ما يتعلق بالمنصة، سواء كنت تبحث عن عقار، تود إعلان عقارك، أو لديك استفسار تقني أو تجاري.</p>
+
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <h4>العنوان الرئيسي</h4>
+          <p>حي الصديقية، وهران، الجزائر</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-text">
+          <h4>رقم الهاتف</h4>
+          <p>+213 (0) 41 00 00 00</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div class="info-text">
+          <h4>البريد الإلكتروني</h4>
+          <p>support@aqar-algeria.dz</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">⏰</div>
+        <div class="info-text">
+          <h4>أوقات العمل</h4>
+          <p>الأحد - الخميس: 08:30 صباحاً - 06:00 مساءً</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form Card -->
+    <div class="contact-form-card">
+      <h2>أرسل لنا رسالة</h2>
+      <p>املأ النموذج أدناه وسيقوم فريق الدعم الفني بالرد عليك في أقرب وقت ممكن.</p>
+
+      <form onsubmit="handleContactSubmit(event)">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" placeholder="اكتب اسمك الكامل..." required>
+        </div>
+
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" placeholder="name@example.dz" required>
+        </div>
+
+        <div class="form-group">
+          <label>موضوع الرسالة</label>
+          <input type="text" placeholder="مثال: استفسار بخصوص إعلان عقاري..." required>
+        </div>
+
+        <div class="form-group">
+          <label>نص الرسالة</label>
+          <textarea rows="5" placeholder="اكتب رسالتك بالتفصيل هنا..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">✉️ إرسال الرسالة</button>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function handleContactSubmit(event) {
+    event.preventDefault();
+    alert('شكراً لتواصلك معنا! تم إرسال رسالتك بنجاح وسيتواصل معك فريقنا قريباً.');
+    event.target.reset();
+  }
+</script>
+
+</body>
+</html>
