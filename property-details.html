@@ -3,60 +3,370 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DarKira - تفاصيل السكن</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#07182a">
+  <title>تفاصيل العقار | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --gold:#d4af37;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1400px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    /* Property Layout */
+    .property-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) 420px;
+      gap: 30px;
+      padding: 40px 0 80px;
+    }
+
+    /* Gallery */
+    .property-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .main-img {
+      height: 450px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .main-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-thumb {
+      height: 90px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      opacity: 0.7;
+      transition: .2s;
+    }
+
+    .gallery-thumb:hover, .gallery-thumb.active {
+      opacity: 1;
+      border-color: var(--teal);
+    }
+
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Property Info */
+    .property-info-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 30px;
+      margin-top: 20px;
+    }
+
+    .property-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+    }
+
+    .property-title-row h1 {
+      font-size: 24px;
+      font-weight: 900;
+      margin: 0 0 8px;
+    }
+
+    .property-location {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .property-price {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--teal);
+      white-space: nowrap;
+    }
+
+    /* Specs Grid */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .spec-box {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      padding: 15px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .spec-box span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .spec-box strong { font-size: 15px; font-weight: 900; }
+
+    /* Description */
+    .section-title { font-size: 18px; font-weight: 900; margin: 0 0 12px; }
+    .property-desc { color: var(--muted); font-size: 14px; line-height: 1.9; margin: 0; }
+
+    /* Sidebar Contact Form */
+    .contact-sidebar {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 30px;
+      height: fit-content;
+      position: sticky;
+      top: 30px;
+    }
+
+    .agent-profile {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .agent-avatar {
+      width: 55px; height: 55px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: white;
+    }
+
+    .agent-details h3 { margin: 0 0 4px; font-size: 16px; font-weight: 900; }
+    .agent-details p { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .form-group label { font-size: 13px; font-weight: 700; color: var(--text); }
+    .form-group input, .form-group textarea {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 12px 15px;
+      border-radius: 12px;
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--teal); }
+
+    .btn{
+      border:0;border-radius:24px;padding:12px 24px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30;
+    }
+    .btn-primary:hover{filter:brightness(1.12);}
+
+    .btn-gold {
+      background: linear-gradient(135deg,#d4af37,#aa8c2c);
+      color: #061629;
+      margin-top: 10px;
+    }
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    @media(max-width: 1050px) {
+      .property-layout { grid-template-columns: 1fr; }
+      .contact-sidebar { position: static; }
+    }
+  </style>
 </head>
-<body class="app-body">
 
-  <header class="app-header">
-    <a href="home.html" style="color:var(--text-primary); text-decoration:none;">&larr; رجوع</a>
-    <div class="map-title-header"><span>تفاصيل السكن</span></div>
-    <div style="display: flex; gap: 10px;">
-      <button style="background:transparent; border:none; color:var(--text-primary); cursor:pointer;">🤍</button>
-      <button style="background:transparent; border:none; color:var(--text-primary); cursor:pointer;">🔗</button>
-    </div>
-  </header>
+<body>
 
-  <main class="main-content-scroll">
-    
-    <!-- معرض الصور -->
-    <div class="grid-img" style="height: 220px; border-radius: var(--radius-sm); margin-bottom: 1rem; display:flex; align-items:center; justify-content:center; color:var(--text-secondary);">
-      <span>معرض صور العقار (Gallery)</span>
-      <span class="badge badge-teal">Verified by Darkira</span>
-    </div>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
 
-    <!-- معلومات العقار الرئيسية -->
-    <div class="form-card-container" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1rem;">
-      <h2 style="font-size: 1.2rem; margin-bottom: 0.25rem;">Hydra, Allger</h2>
-      <p style="color: var(--accent-blue); font-weight: 800; font-size: 1.1rem; margin-bottom: 0.75rem;">80,000 DA <span style="font-size: 0.75rem; color:var(--text-secondary);">/month</span></p>
-      
-      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 0.75rem 0; margin-bottom: 0.75rem;">
-        <span>🛏️ 1 hiyam</span>
-        <span>📐 120eqm</span>
-        <span>✨ 2 teayens</span>
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a class="active" href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container property-layout">
+  
+  <!-- Left Main Content -->
+  <div>
+    <!-- Gallery -->
+    <div class="property-gallery">
+      <div class="main-img">
+        <img id="mainImage" src="https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=1200&q=85" alt="شقة عصرية بوهران">
       </div>
-
-      <p style="font-size: 0.85rem; color: var(--text-secondary);">شقة مجهزة بالكامل وموثقة رسمياً من طرف نظام داركيرة لضمان حقوق المالك والمستأجر.</p>
-    </div>
-
-    <!-- معلومات المضيف Host Profile -->
-    <div class="form-card-container" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 4rem;">
-      <div style="display: flex; align-items: center; gap: 0.75rem;">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover;">
-        <div>
-          <h4 style="font-size: 0.95rem;">Host Profile</h4>
-          <p style="font-size: 0.75rem; color: var(--text-secondary);">⭐ 4.5 • موثق معتمد</p>
+      <div class="gallery-grid">
+        <div class="gallery-thumb active" onclick="changeImage(this, 'https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=1200&q=85')">
+          <img src="https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=400&q=80" alt="صورة 1">
+        </div>
+        <div class="gallery-thumb" onclick="changeImage(this, 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85')">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80" alt="صورة 2">
+        </div>
+        <div class="gallery-thumb" onclick="changeImage(this, 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85')">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80" alt="صورة 3">
+        </div>
+        <div class="gallery-thumb" onclick="changeImage(this, 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85')">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=400&q=80" alt="صورة 4">
         </div>
       </div>
-      <div style="display: flex; gap: 0.5rem;">
-        <a href="chat.html" class="filter-pill" style="background:var(--accent-teal); color:white; border:none; padding: 0.5rem 0.75rem; text-decoration:none;">Contact Host</a>
-        <a href="tel:0550000000" class="filter-pill" style="background:var(--accent-blue); color:#0F172A; border:none; padding: 0.5rem 0.75rem; text-decoration:none; font-weight:700;">Call</a>
+    </div>
+
+    <!-- Info Card -->
+    <div class="property-info-card">
+      <div class="property-title-row">
+        <div>
+          <h1>شقة F4 فاخرة مع واطلالة رائعة</h1>
+          <span class="property-location">📍 ولاية وهران • بلدية بئر الجير (حي الياسمين)</span>
+        </div>
+        <div class="property-price">18,500,000 دج</div>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-box">
+          <span>المساحة</span>
+          <strong>135 م²</strong>
+        </div>
+        <div class="spec-box">
+          <span>عدد الغرف</span>
+          <strong>4 غرف</strong>
+        </div>
+        <div class="spec-box">
+          <span>الوثائق القانونية</span>
+          <strong style="color:var(--green)">عقد + دفتر عقاري</strong>
+        </div>
+      </div>
+
+      <h3 class="section-title">تفاصيل ووصف العقار</h3>
+      <p class="property-desc">
+        شقة سكنية راقية تقع في حي هادئ وآمن ببلدية بئر الجير بولاية وهران. تحتوي على صالون واسع، 3 غرف نوم، مطبخ مجهز بالكامل، وحمامين. الشقة مزودة بمصعد كهربائي، خزان محلي للماء، نظام تدفئة مركزية، ومرآب خاص للسيارات. قريبة من جميع المرافق الضرورية والمواصلات.
+      </p>
+    </div>
+  </div>
+
+  <!-- Right Sidebar Contact -->
+  <aside class="contact-sidebar">
+    <div class="agent-profile">
+      <div class="agent-avatar">أ.س</div>
+      <div class="agent-details">
+        <h3>أمين سليم</h3>
+        <p>وكيل عقاري معتمد • وكالة الباهية</p>
       </div>
     </div>
 
-  </main>
+    <form onsubmit="event.preventDefault(); alert('تم إرسال رسالتك بنجاح إلى المُعلن وسيتواصل معك قريباً!');">
+      <div class="form-group">
+        <label>الاسم الكامل</label>
+        <input type="text" placeholder="أدخل اسمك الكريم" required>
+      </div>
+      <div class="form-group">
+        <label>رقم الهاتف</label>
+        <input type="text" placeholder="+213..." required>
+      </div>
+      <div class="form-group">
+        <label>الرسالة</label>
+        <textarea rows="3" placeholder="مهتم بهذا العقار، أرجو التواصل معي...">مهتم بهذا العقار، أرجو التواصل معي...</textarea>
+      </div>
 
-  <script src="script.js"></script>
+      <button type="submit" class="btn btn-primary">إرسال استفسار ✉️</button>
+    </form>
+
+    <a href="notary-chat.html" class="btn btn-gold">📜 الانتقال لغرفة التوثيق مع الموثق</a>
+  </aside>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function changeImage(thumbElement, src) {
+    document.getElementById('mainImage').src = src;
+    document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+    thumbElement.classList.add('active');
+  }
+</script>
+
 </body>
 </html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <title>حاسبة التمويل العقاري | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --blue:#268df2;
+      --gold:#d4af37;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1300px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    /* Calculator Layout */
+    .calc-section {
+      padding: 50px 0 80px;
+    }
+
+    .calc-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .calc-header h1 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 900;
+      margin: 0 0 10px;
+    }
+
+    .calc-header h1 span { color: var(--teal); }
+
+    .calc-header p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .calc-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 30px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-group label span {
+      color: var(--teal);
+      font-weight: 800;
+    }
+
+    .form-group input, .form-group select {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 12px 15px;
+      border-radius: 12px;
+      outline: none;
+      transition: .2s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--teal);
+    }
+
+    .range-slider {
+      width: 100%;
+      accent-color: var(--teal);
+      margin-top: 5px;
+    }
+
+    /* Result Panel */
+    .result-card {
+      background: linear-gradient(145deg, var(--panel), var(--panel2));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .result-head h3 {
+      margin: 0 0 5px;
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .monthly-payment {
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 900;
+      color: var(--teal);
+      margin: 10px 0 25px;
+      line-height: 1.1;
+    }
+
+    .summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .summary-item span:first-child { color: var(--muted); }
+    .summary-item span:last-child { font-weight: 800; }
+
+    .btn{
+      border:0;border-radius:24px;padding:12px 24px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30;width:100%
+    }
+    .btn-primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    @media(max-width: 950px) {
+      .calc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+      <a class="active" href="mortgage-calculator.html">حاسبة التمويل</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container calc-section">
+  <div class="calc-header">
+    <h1>حاسبة <span>التمويل العقاري</span> التقديرية</h1>
+    <p>احسب الدفعة الشهرية المتوقعة، قيمة التمويل المطلوبة، ومدد السداد المناسبة لخطتك الاستثمارية</p>
+  </div>
+
+  <div class="calc-grid">
+    
+    <!-- Inputs Card -->
+    <div class="calc-card">
+      <div class="form-group">
+        <label>سعر العقار التقديري (دج) <span id="propertyPriceVal">15,000,000 دج</span></label>
+        <input type="number" id="propertyPrice" value="15000000" step="500000" oninput="calculateMortgage()">
+        <input type="range" class="range-slider" min="3000000" max="100000000" step="500000" value="15000000" id="propertyPriceRange" oninput="syncInputs('propertyPriceRange', 'propertyPrice')">
+      </div>
+
+      <div class="form-group">
+        <label>الدفعة الأولى المقدمة (دج) <span id="downPaymentVal">3,000,000 دج</span></label>
+        <input type="number" id="downPayment" value="3000000" step="100000" oninput="calculateMortgage()">
+      </div>
+
+      <div class="form-group">
+        <label>مدة التمويل بالسنوات</label>
+        <select id="loanYears" onchange="calculateMortgage()">
+          <option value="10">10 سنوات (120 شهر)</option>
+          <option value="15">15 سنة (180 شهر)</option>
+          <option value="20" selected>20 سنة (240 شهر)</option>
+          <option value="25">25 سنة (300 شهر)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>نسبة الفائدة السنوية المتوقعة (%)</label>
+        <input type="number" id="interestRate" value="4.5" step="0.1" oninput="calculateMortgage()">
+      </div>
+    </div>
+
+    <!-- Result Card -->
+    <div class="result-card">
+      <div class="result-head">
+        <h3>السط المالي الشهري التقديري</h3>
+        <div class="monthly-payment" id="monthlyResult">68,320 دج</div>
+      </div>
+
+      <div class="summary-list">
+        <div class="summary-item">
+          <span>إجمالي مبلغ التمويل المطلوب:</span>
+          <span id="loanAmountSummary">12,000,000 دج</span>
+        </div>
+        <div class="summary-item">
+          <span>إجمالي الفوائد على طول المدة:</span>
+          <span id="totalInterestSummary">4,396,800 دج</span>
+        </div>
+        <div class="summary-item">
+          <span>إجمالي المبلغ السدد للبنك:</span>
+          <span id="totalPayableSummary">16,396,800 دج</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="alert('جاري توجيهك للتواصل مع المصارف والوكالات المعتمدة...')">📞 طلب استشارة تمويل عقاري</button>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function formatDZD(val) {
+    return new Intl.NumberFormat('ar-DZ').format(Math.round(val)) + ' دج';
+  }
+
+  function syncInputs(sourceId, targetId) {
+    const val = document.getElementById(sourceId).value;
+    document.getElementById(targetId).value = val;
+    calculateMortgage();
+  }
+
+  function calculateMortgage() {
+    const price = parseFloat(document.getElementById('propertyPrice').value) || 0;
+    const down = parseFloat(document.getElementById('downPayment').value) || 0;
+    const years = parseInt(document.getElementById('loanYears').value) || 20;
+    const rate = parseFloat(document.getElementById('interestRate').value) || 4.5;
+
+    document.getElementById('propertyPriceVal').textContent = formatDZD(price);
+    document.getElementById('downPaymentVal').textContent = formatDZD(down);
+
+    const loanAmount = Math.max(0, price - down);
+    const months = years * 12;
+    const monthlyRate = (rate / 100) / 12;
+
+    let monthlyPayment = 0;
+    if (monthlyRate > 0 && months > 0 && loanAmount > 0) {
+      monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+    } else if (months > 0 && loanAmount > 0) {
+      monthlyPayment = loanAmount / months;
+    }
+
+    const totalPayable = monthlyPayment * months;
+    const totalInterest = Math.max(0, totalPayable - loanAmount);
+
+    document.getElementById('monthlyResult').textContent = formatDZD(monthlyPayment) + ' / شهرياً';
+    document.getElementById('loanAmountSummary').textContent = formatDZD(loanAmount);
+    document.getElementById('totalInterestSummary').textContent = formatDZD(totalInterest);
+    document.getElementById('totalPayableSummary').textContent = formatDZD(totalPayable);
+  }
+
+  // Initial calculation on load
+  calculateMortgage();
+</script>
+
+</body>
+</html>

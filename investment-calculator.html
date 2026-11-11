@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182a">
+  <title>حاسبة العائد الاستثماري | عقار AQAR الجزائر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#07182a;
+      --panel:#0d2238;
+      --panel2:#112b43;
+      --line:rgba(133,178,204,.18);
+      --teal:#08b6ad;
+      --teal2:#087f83;
+      --text:#f4f8fc;
+      --muted:#a8bacb;
+      --white:#fff;
+      --green:#12c982;
+      --gold:#d4af37;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",sans-serif}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(1300px,94%);margin:auto}
+
+    .topbar{
+      height:76px;background:#061629;border-bottom:1px solid var(--line);
+      display:flex;align-items:center;position:relative;z-index:20
+    }
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:210px}
+    .brand-mark{
+      font-family:Georgia,serif;font-style:italic;font-size:42px;
+      line-height:1;color:#18c5bd;text-shadow:2px 2px 0 #dce9e9;
+      font-weight:900
+    }
+    .brand-name{font-size:18px;font-weight:900;line-height:1.35}
+    .brand-name small{
+      display:block;color:var(--muted);font-size:10px;
+      font-weight:500;direction:ltr;text-align:right;letter-spacing:1px
+    }
+
+    .nav-links{display:flex;align-items:center;gap:30px;color:#d5e1eb;font-size:14px}
+    .nav-links a{padding:9px 0;transition:.2s}
+    .nav-links a:hover,.nav-links a.active{color:#40d6ce}
+
+    /* Calculator Layout */
+    .calc-section { padding: 50px 0 80px; }
+
+    .calc-header { text-align: center; margin-bottom: 40px; }
+    .calc-header h1 { font-size: clamp(26px, 4vw, 36px); font-weight: 900; margin: 0 0 10px; }
+    .calc-header h1 span { color: var(--teal); }
+    .calc-header p { color: var(--muted); font-size: 15px; max-width: 650px; margin: 0 auto; }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .calc-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 30px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-group label span { color: var(--teal); font-weight: 800; }
+
+    .form-group input {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 12px 15px;
+      border-radius: 12px;
+      outline: none;
+      transition: .2s;
+    }
+
+    .form-group input:focus { border-color: var(--teal); }
+
+    /* Result Panel */
+    .result-card {
+      background: linear-gradient(145deg, var(--panel), var(--panel2));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .result-head h3 { margin: 0 0 5px; font-size: 16px; color: var(--muted); font-weight: 700; }
+    .roi-percentage {
+      font-size: clamp(36px, 6vw, 52px);
+      font-weight: 900;
+      color: var(--green);
+      margin: 10px 0 25px;
+      line-height: 1.1;
+    }
+
+    .summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    .summary-item { display: flex; justify-content: space-between; font-size: 14px; }
+    .summary-item span:first-child { color: var(--muted); }
+    .summary-item span:last-child { font-weight: 800; }
+
+    .btn{
+      border:0;border-radius:24px;padding:12px 24px;
+      font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#0cbeb3,#087f83);
+      color:white;box-shadow:0 7px 18px #00a79b30;
+    }
+    .btn-primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
+
+    footer{padding:25px 0 32px;background:#061629;color:var(--muted);font-size:13px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    @media(max-width: 950px) {
+      .calc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">AQ</span>
+      <span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html">الرئيسية</a>
+      <a href="properties.html">العقارات</a>
+      <a href="map.html">الخريطة</a>
+      <a class="active" href="investment-calculator.html">حاسبة الاستثمار</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container calc-section">
+  <div class="calc-header">
+    <h1>حاسبة العائد الاستثماري <span>العقاري (ROI)</span></h1>
+    <p>قم بتحليل جدوى استثمارك العقاري في الجزائر، احسب نسبة العائد السنوي وفترة استرداد رأس المال فورياً</p>
+  </div>
+
+  <div class="calc-grid">
+    
+    <!-- Inputs Card -->
+    <div class="calc-card">
+      <div class="form-group">
+        <label>سعر شراء العقار الإجمالي (دج) <span id="purchasePriceVal">18,000,000 دج</span></label>
+        <input type="number" id="purchasePrice" value="18000000" step="500000" oninput="calculateROI()">
+      </div>
+
+      <div class="form-group">
+        <label>الإيجار الشهري المتوقع (دج) <span id="monthlyRentVal">75,000 دج</span></label>
+        <input type="number" id="monthlyRent" value="75000" step="5000" oninput="calculateROI()">
+      </div>
+
+      <div class="form-group">
+        <label>مصاريف الصيانة والضرائب السنوية (دج) <span id="annualExpensesVal">50,000 دج</span></label>
+        <input type="number" id="annualExpenses" value="50000" step="10000" oninput="calculateROI()">
+      </div>
+    </div>
+
+    <!-- Result Card -->
+    <div class="result-card">
+      <div class="result-head">
+        <h3>نسبة العائد الاستثماري السنوي (ROI)</h3>
+        <div class="roi-percentage" id="roiResult">4.67%</div>
+      </div>
+
+      <div class="summary-list">
+        <div class="summary-item">
+          <span>إجمالي الإيجار السنوي:</span>
+          <span id="annualRevenueSummary">900,000 دج</span>
+        </div>
+        <div class="summary-item">
+          <span>صافي الدخل السنوي (بعد المصاريف):</span>
+          <span id="netAnnualIncomeSummary">850,000 دج</span>
+        </div>
+        <div class="summary-item">
+          <span>فترة استرداد رأس المال التقديرية:</span>
+          <span id="paybackPeriodSummary">21.1 سنة</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="alert('جاري حفظ حسابات الاستثمار أو مشاركتها...')">💾 حفظ ومشاركة التحليل الاستثماري</button>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AQ</span><span class="brand-name">عقار | AQAR<small>AQAR ALGERIA</small></span></a>
+    <span>© 2026 عقار AQAR الجزائر — جميع الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+  function formatDZD(val) {
+    return new Intl.NumberFormat('ar-DZ').format(Math.round(val)) + ' دج';
+  }
+
+  function calculateROI() {
+    const price = parseFloat(document.getElementById('purchasePrice').value) || 0;
+    const rent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+    const expenses = parseFloat(document.getElementById('annualExpenses').value) || 0;
+
+    document.getElementById('purchasePriceVal').textContent = formatDZD(price);
+    document.getElementById('monthlyRentVal').textContent = formatDZD(rent);
+    document.getElementById('annualExpensesVal').textContent = formatDZD(expenses);
+
+    const annualRevenue = rent * 12;
+    const netIncome = Math.max(0, annualRevenue - expenses);
+    
+    let roi = 0;
+    let payback = 0;
+    if (price > 0) {
+      roi = (netIncome / price) * 100;
+      payback = price / netIncome;
+    }
+
+    document.getElementById('roiResult').textContent = roi.toFixed(2) + '%';
+    document.getElementById('annualRevenueSummary').textContent = formatDZD(annualRevenue);
+    document.getElementById('netAnnualIncomeSummary').textContent = formatDZD(netIncome);
+    document.getElementById('paybackPeriodSummary').textContent = payback > 0 ? payback.toFixed(1) + ' سنة' : 'غير متوفر';
+  }
+
+  // Initial calculation on load
+  calculateROI();
+</script>
+
+</body>
+</html>
